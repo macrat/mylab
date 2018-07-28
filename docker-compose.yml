@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  jupyterlab:
+    build: ./jupyterlab
+
+    ports:
+      - 3001:8888
+    volumes:
+      - mylab:/work
+
+    command:
+      - --NotebookApp.password="${PASSWORD}" --NotebookApp.notebook_dir=/work
+
+    env_file: .env
+
+  db:
+    image: mariadb
+
+    env_file: ./.env
+
+  filerun:
+    build: ./filerun
+
+    depends_on:
+      - db
+
+    ports:
+      - 3002:80
+    volumes:
+      - mylab:/user-files
+
+    environment:
+      - APACHE_RUN_USER=filerun
+      - APACHE_RUN_GROUP=filerun
+    env_file: .env
+
+volumes:
+  mylab:
