@@ -7,7 +7,7 @@ services:
     ports:
       - 3001:8888
     volumes:
-      - mylab:/work
+      - files:/work
 
     command:
       - --NotebookApp.password="${PASSWORD}" --NotebookApp.notebook_dir=/work
@@ -16,6 +16,9 @@ services:
 
   db:
     image: mariadb
+
+    volumes:
+      - db:/var/lib/mysql
 
     env_file: ./.env
 
@@ -28,7 +31,7 @@ services:
     ports:
       - 3002:80
     volumes:
-      - mylab:/user-files
+      - files:/user-files
 
     environment:
       - APACHE_RUN_USER=filerun
@@ -36,4 +39,5 @@ services:
     env_file: .env
 
 volumes:
-  mylab:
+  files:
+  db:
