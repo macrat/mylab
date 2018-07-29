@@ -20,7 +20,7 @@ services:
     volumes:
       - db:/var/lib/mysql
 
-    env_file: ./.env
+    env_file: .env
 
   filerun:
     build: ./filerun
@@ -34,6 +34,8 @@ services:
       - files:/user-files
 
     environment:
+      - FR_DB_HOST=db
+      - FR_DB_PORT=3306
       - APACHE_RUN_USER=filerun
       - APACHE_RUN_GROUP=filerun
     env_file: .env
