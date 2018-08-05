@@ -7,7 +7,8 @@ services:
     ports:
       - 3001:8888
     volumes:
-      - files:/work
+      - lab_home:/home/jovyan
+      - notebooks:/work
 
     command:
       - --NotebookApp.password="${PASSWORD}" --NotebookApp.notebook_dir=/work
@@ -26,8 +27,8 @@ services:
 
     restart: always
 
-  filerun:
-    build: ./filerun
+  nextcloud:
+    build: ./nextcloud
 
     depends_on:
       - db
@@ -35,17 +36,17 @@ services:
     ports:
       - 3002:80
     volumes:
-      - files:/user-files
+      - notebooks:/notebooks
+      - nextcloud:/var/www/html
 
     environment:
-      - FR_DB_HOST=db
-      - FR_DB_PORT=3306
-      - APACHE_RUN_USER=filerun
-      - APACHE_RUN_GROUP=filerun
+      - MYSQL_HOST=db
     env_file: .env
 
     restart: always
 
 volumes:
-  files:
   db:
+  lab_home:
+  nextcloud:
+  notebooks:
