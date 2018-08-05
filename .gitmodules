@@ -1,6 +1,0 @@
-[submodule "filelab"]
-	path = filelab
-	url = https://github.com/macrat/filelab
-[submodule "jupyterlab"]
-	path = jupyterlab
-	url = https://github.com/macrat/docker-jupyterlab

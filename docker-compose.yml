@@ -2,7 +2,7 @@ version: "3"
 
 services:
   jupyterlab:
-    build: ./jupyterlab
+    image: macrat/jupyterlab
 
     ports:
       - 3001:8888
@@ -11,7 +11,7 @@ services:
       - notebooks:/work
 
     command:
-      - --NotebookApp.password="${PASSWORD}" --NotebookApp.notebook_dir=/work
+      - --NotebookApp.password="${PASSWORD}"
 
     env_file: .env
 
