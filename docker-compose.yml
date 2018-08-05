@@ -10,6 +10,8 @@ services:
       - lab_home:/home/jovyan
       - notebooks:/work
 
+    dns: 8.8.8.8
+
     command:
       - --NotebookApp.password="${PASSWORD}"
 
@@ -38,6 +40,8 @@ services:
     volumes:
       - notebooks:/notebooks
       - nextcloud:/var/www/html
+
+    dns: 8.8.8.8
 
     environment:
       - MYSQL_HOST=db
